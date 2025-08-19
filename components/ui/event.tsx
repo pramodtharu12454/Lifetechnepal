@@ -182,7 +182,7 @@ export default function UpcomingEvents() {
                 </div>
               </div>
 
-              // helloew user to push
+              // helloew user to push hellow
             ))}
           </div>
         </div>

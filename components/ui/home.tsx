@@ -59,7 +59,7 @@ export default function HeroSection() {
       sx={{
         background: "linear-gradient(180deg, #b71c1c 0%, #b71c1c 100%)",
         color: "#fff",
-        py: { xs: 6, md: 20 },
+        py: { xs: 6, md: 40 },
         textAlign: "center",
         position: "relative",
         overflow: "auto",

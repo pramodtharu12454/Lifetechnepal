@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function UpcomingEvents() {
+  const [showAll, setShowAll] = useState(false);
+
   const events = [
     {
       title: "AI & Machine Learning Workshop",
@@ -36,10 +40,59 @@ export default function UpcomingEvents() {
       location: "Grand Convention Hall",
       attendees: 120,
     },
+    {
+      title: "Mobile App Development Hackathon",
+      price: "Free",
+      description:
+        "48-hour hackathon focused on building innovative mobile apps.",
+      date: "Friday, October 25, 2024",
+      time: "9:00 AM - 9:00 PM",
+      location: "Life Tech Hub",
+      attendees: 80,
+    },
+    {
+      title: "Cloud Computing & DevOps Seminar",
+      price: "Rs 1999",
+      description:
+        "Learn about AWS, Docker, Kubernetes, and CI/CD from industry experts.",
+      date: "Sunday, November 10, 2024",
+      time: "11:00 AM - 5:00 PM",
+      location: "Innovation Hall",
+      attendees: 95,
+    },
+  ];
+
+  const gallery = [
+    {
+      img: "/bca.jpg",
+      title: "Coding Competition",
+      desc: "A platform for young innovators to showcase coding skills.",
+    },
+    {
+      img: "/it.jpg",
+      title: "BIT, BSc.CSIT, BCA Students",
+      desc: "Special coding contest for IT-related disciplines.",
+    },
+    {
+      img: "/bba.jpg",
+      title: "Entrepreneurship in Tech",
+      desc: "Turn your coding idea into a startup journey.",
+    },
+    {
+      img: "/hackathon.png",
+      title: "Hackathon Series",
+      desc: "Collaborate and solve real-world challenges.",
+    },
+    {
+      img: "/women.png",
+      title: "Women in Tech",
+      desc: "Encouraging women participation in coding & innovation.",
+    },
   ];
 
   return (
     <section className="py-10 mt-20">
+      {/* Event Section */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold">Upcoming Events</h2>
         <p className="text-gray-500 mt-2">
@@ -49,7 +102,7 @@ export default function UpcomingEvents() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-6">
-        {events.map((event, idx) => (
+        {(showAll ? events : events.slice(0, 3)).map((event, idx) => (
           <Card
             key={idx}
             className="w-[400px] transition-transform duration-300 hover:scale-105 hover:shadow-xl"
@@ -93,9 +146,44 @@ export default function UpcomingEvents() {
         <Button
           variant="outline"
           className="border-red-500 text-red-500 hover:bg-red-50"
+          onClick={() => setShowAll(!showAll)}
         >
-          View All Events
+          {showAll ? "Show Less" : "View All Events"}
         </Button>
+      </div>
+
+      {/* Image Gallery Section */}
+      <div className="mt-16">
+        <h3 className="text-2xl font-bold text-center mb-6">
+          Event Highlights
+        </h3>
+        <div className="flex justify-center">
+          <div
+            className="flex gap-6 overflow-x-auto scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-200 px-4"
+            style={{ maxWidth: "1200px" }}
+          >
+            {" "}
+            {/* 3 cards width */}
+            {gallery.map((item, idx) => (
+              <div
+                key={idx}
+                className="min-w-[350px] max-w-[350px] relative group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition"
+              >
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  width={400}
+                  height={250}
+                  className="w-full h-60 object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex flex-col justify-end p-4 text-white">
+                  <h4 className="text-lg font-semibold">{item.title}</h4>
+                  <p className="text-sm">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

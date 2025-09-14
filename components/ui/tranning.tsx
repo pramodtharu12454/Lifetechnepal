@@ -3,9 +3,14 @@
 import { Box, Typography, Button, Chip } from "@mui/material";
 import { Card, CardContent } from "@/components/ui/card"; // ShadCN UI
 import { Code, Smartphone, Database, Cloud, Shield, Globe } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const programs = [
   {
+    id: "fullstack",
+    badge: "Best Seller",
+    image: "/traning/full stack.jpg",
     icon: <Code size={28} color="#ff4d4d" />,
     title: "Full Stack Development",
     duration: "6 months",
@@ -17,6 +22,9 @@ const programs = [
     rating: "★ 4.8/5",
   },
   {
+    id: "mobile",
+    badge: "Popular",
+    image: "/traning/mobileapp.jpg",
     icon: <Smartphone size={28} color="#ff4d4d" />,
     title: "Mobile App Development",
     duration: "4 months",
@@ -28,6 +36,9 @@ const programs = [
     rating: "★ 4.8/5",
   },
   {
+    id: "datascience",
+    badge: "New",
+    image: "/traning/datascience.jpg",
     icon: <Database size={28} color="#ff4d4d" />,
     title: "Data Science & AI",
     duration: "8 months",
@@ -39,6 +50,9 @@ const programs = [
     rating: "★ 4.8/5",
   },
   {
+    id: "cloud",
+    badge: "Trending",
+    image: "/traning/cloudcomputing.jpg",
     icon: <Cloud size={28} color="#ff4d4d" />,
     title: "Cloud Computing",
     duration: "3 months",
@@ -50,6 +64,9 @@ const programs = [
     rating: "★ 4.8/5",
   },
   {
+    id: "cybersecurity",
+    badge: "Hot",
+    image: "/traning/cybersecurity.jpg",
     icon: <Shield size={28} color="#ff4d4d" />,
     title: "Cybersecurity",
     duration: "5 months",
@@ -61,6 +78,9 @@ const programs = [
     rating: "★ 4.8/5",
   },
   {
+    id: "marketing",
+    badge: "Top Rated",
+    image: "/traning/digitalmarketing.jpg",
     icon: <Globe size={28} color="#ff4d4d" />,
     title: "Digital Marketing",
     duration: "3 months",
@@ -85,73 +105,141 @@ export default function TrainingPrograms() {
         designed by experts and trusted by professionals worldwide.
       </Typography>
 
-      {/* Flexbox Layout - 3 per row */}
+      {/* Grid Layout */}
       <Box
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "1fr",
+            sm: "1fr 1fr",
+            md: "1fr 1fr 1fr",
+          },
           gap: 3,
-          justifyContent: "center",
         }}
       >
         {programs.map((p, index) => (
           <Card
             key={index}
+            id={p.id}
             className="transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
             style={{
               border: "1px solid #eee",
-              flex: "1 1 calc(33.333% - 24px)", // exactly 3 per row
-              maxWidth: "calc(33.333% - 24px)",
               display: "flex",
               flexDirection: "column",
-              minWidth: "280px",
+              overflow: "hidden",
+              position: "relative",
+              padding: 0, // p-0
             }}
           >
-            <CardContent style={{ textAlign: "left", flexGrow: 1 }}>
-              {p.icon}
-              <Typography
-                variant="h6"
-                sx={{ fontWeight: "bold", mt: 2, mb: 1 }}
+            {/* Image with overlay */}
+            <Box sx={{ position: "relative", height: { xs: 160, md: 200 } }}>
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                style={{ objectFit: "cover" }}
+              />
+
+              {/* Top-left ribbon */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 10,
+                  left: -30,
+                  backgroundColor: "#ff4d4d",
+                  color: "#fff",
+                  px: 3,
+                  py: 0.5,
+                  transform: "rotate(-45deg)",
+                  fontSize: "0.75rem",
+                  fontWeight: "bold",
+                  width: "120px",
+                  textAlign: "center",
+                  boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
+                }}
               >
-                {p.title}
-              </Typography>
-              <Box sx={{ display: "flex", gap: 1, mb: 1 }}>
+                {p.badge}
+              </Box>
+
+              {/* Overlay text */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  width: "100%",
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.7), transparent)",
+                  color: "#fff",
+                  p: 2,
+                }}
+              >
+                <Typography sx={{ fontWeight: "bold", fontSize: "1rem" }}>
+                  {p.title}
+                </Typography>
+                <Typography sx={{ fontSize: "0.75rem" }}>
+                  {p.technologies.join(", ")}
+                </Typography>
+              </Box>
+            </Box>
+
+            {/* Card Content */}
+            <CardContent
+              style={{ textAlign: "left", flexGrow: 1, padding: 12 }}
+            >
+              <Box
+                sx={{ display: "flex", gap: 1, mb: 1, mt: 1, flexWrap: "wrap" }}
+              >
                 <Chip label={p.duration} size="small" />
                 <Chip label={p.level} size="small" color="primary" />
               </Box>
-              <Typography sx={{ mb: 1, fontSize: "0.9rem", color: "gray" }}>
+              <Typography sx={{ mb: 1, fontSize: "0.85rem", color: "gray" }}>
                 {p.description}
               </Typography>
 
-              <Typography sx={{ fontWeight: "bold", mb: 1 }}>
-                Technologies:
-              </Typography>
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}>
-                {p.technologies.map((tech, i) => (
-                  <Chip key={i} label={tech} size="small" variant="outlined" />
-                ))}
-              </Box>
-
-              <Typography sx={{ color: "gray", fontSize: "0.85rem" }}>
+              <Typography sx={{ color: "gray", fontSize: "0.8rem" }}>
                 {p.students}
               </Typography>
-              <Typography sx={{ color: "#ff4d4d", fontSize: "0.9rem" }}>
+              <Typography sx={{ color: "#ff4d4d", fontSize: "0.85rem" }}>
                 {p.rating}
               </Typography>
             </CardContent>
 
-            <Box sx={{ p: 2, textAlign: "center" }}>
-              <Button
-                variant="contained"
-                fullWidth
-                sx={{
-                  backgroundColor: "#ff4d4d",
-                  "&:hover": { backgroundColor: "#e63b3b" },
-                  borderRadius: "8px",
-                }}
-              >
-                Enroll Now
-              </Button>
+            {/* Buttons */}
+            <Box
+              sx={{
+                p: 2,
+                display: "flex",
+                gap: 1,
+                flexDirection: { xs: "column", sm: "row" },
+              }}
+            >
+              <Link href={`/enroll/${p.id}`} style={{ flex: 1 }}>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  sx={{
+                    borderColor: "#ff4d4d",
+                    color: "#ff4d4d",
+                    fontWeight: "bold",
+                  }}
+                >
+                  View Details
+                </Button>
+              </Link>
+              <Link href={`/book/${p.id}`} style={{ flex: 1 }}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  sx={{
+                    backgroundColor: "#ff4d4d",
+                    "&:hover": { backgroundColor: "#e63b3b" },
+                    fontWeight: "bold",
+                  }}
+                >
+                  Book Now
+                </Button>
+              </Link>
             </Box>
           </Card>
         ))}
@@ -166,12 +254,13 @@ export default function TrainingPrograms() {
           px: 2,
           mt: 6,
           color: "#fff",
+          textAlign: "center",
         }}
       >
         <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
           Ready to Start Learning?
         </Typography>
-        <Typography sx={{ mb: 3 }}>
+        <Typography sx={{ mb: 3, fontSize: "0.95rem" }}>
           Join thousands of professionals who have transformed their careers
           with our training programs.
         </Typography>

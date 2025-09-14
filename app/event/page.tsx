@@ -1,4 +1,4 @@
-import UpcomingEvents from "@/components/ui/event";
+import UpcomingEvents from "@/components/event/event";
 import React from "react";
 
 const event = () => {

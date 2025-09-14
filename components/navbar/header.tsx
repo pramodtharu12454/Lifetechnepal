@@ -3,42 +3,63 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"; // ShadCN dialog
+import { Menu, X, User } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { usePathname } from "next/navigation";
 
 export default function CompanyHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [userDropdown, setUserDropdown] = useState(false);
 
-  // Show popup on first load
-  useEffect(() => {
-    setShowPopup(true);
-  }, []);
+  const pathname = usePathname(); // detect current route
+  const isHome = pathname === "/";
 
   const navItems = [
     { label: "Dashboard", href: "/" },
     { label: "About Us", href: "/About" },
     { label: "Training", href: "/tranning" },
     { label: "Event", href: "/event" },
-    { label: "Our Services", href: "/services" },
+    { label: "Our Services", href: "/services/viewallservice" },
     { label: "Gallery", href: "/gallery" },
     { label: "Other", href: "/other" },
   ];
 
+  useEffect(() => {
+    // Popup on first load
+    setShowPopup(true);
+
+    // Scroll listener for home page
+    const handleScroll = () => {
+      if (window.scrollY > 50) setScrolled(true);
+      else setScrolled(false);
+    };
+
+    if (isHome) window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      if (isHome) window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isHome]);
+
   return (
     <>
       {/* Header */}
-      <header className="bg-gradient-to-r from-red-500 to-red-700 shadow-lg fixed top-0 left-0 w-full z-50">
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+          isHome
+            ? scrolled
+              ? "bg-gradient-to-r from-red-500 to-red-700 shadow-lg"
+              : "bg-transparent"
+            : "bg-gradient-to-r from-red-500 to-red-700 shadow-lg"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo + Name */}
+            {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <div className="relative w-10 h-10 transform rotate-3 hover:rotate-0 transition-transform duration-300">
                 <Image
@@ -68,14 +89,43 @@ export default function CompanyHeader() {
               </nav>
             </div>
 
-            {/* Talk to Expert Button */}
-            <div className="hidden md:flex">
+            {/* Talk to Expert + User Icon */}
+            <div className="hidden md:flex items-center space-x-4 relative">
               <Link
                 href="/letstalk"
                 className="bg-yellow-400 hover:bg-yellow-500 text-red-900 font-semibold px-4 py-2 rounded-full shadow-md transition duration-300"
               >
                 Talk to Expert
               </Link>
+
+              {/* User Icon with Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setUserDropdown(!userDropdown)}
+                  className="text-white hover:text-yellow-300 transition-colors duration-200"
+                >
+                  <User size={24} />
+                </button>
+
+                {userDropdown && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg overflow-hidden z-50">
+                    <Link
+                      href="/login"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => setUserDropdown(false)}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => setUserDropdown(false)}
+                    >
+                      Register
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -109,6 +159,41 @@ export default function CompanyHeader() {
               >
                 Talk to Expert
               </Link>
+
+              {/* User Dropdown Mobile */}
+              <div className="relative">
+                <button
+                  onClick={() => setUserDropdown(!userDropdown)}
+                  className="text-white hover:text-yellow-300 transition-colors duration-200"
+                >
+                  <User size={24} />
+                </button>
+
+                {userDropdown && (
+                  <div className="absolute right-0 mt-2 w-36 bg-white rounded-md shadow-lg overflow-hidden z-50">
+                    <Link
+                      href="/login"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => {
+                        setUserDropdown(false);
+                        setMenuOpen(false);
+                      }}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+                      onClick={() => {
+                        setUserDropdown(false);
+                        setMenuOpen(false);
+                      }}
+                    >
+                      Register
+                    </Link>
+                  </div>
+                )}
+              </div>
             </nav>
           </div>
         )}
@@ -139,7 +224,6 @@ export default function CompanyHeader() {
           >
             <CloseIcon />
           </IconButton>
-
           <Image
             src="/popupimage.jpg"
             alt="Popup"

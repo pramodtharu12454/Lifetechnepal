@@ -26,16 +26,10 @@ export default function AboutLifeTech() {
         <div>
           <h3 className="text-xl font-semibold mb-4">Our Story</h3>
           <p className="text-gray-600 mb-4">
-            Life Tech began as a small team of passionate technologists who
-            believed that every business deserves access to world-class
-            technology solutions. Today, we have grown into a comprehensive
-            technology partner serving clients across industries.
+           Life Tech PVT.Ltd. is a software development company in Nepal that deals with web and software Solutions. It is a strong and energetic team that is always ready to solve your problems. We assure you that we will our work to keep it with our mottocommited to developing and delivering software products and services that tackle various challenges faced by individuals and businesses in Nepal.The company utilizes emerging technologies to create solutions that enhance productivity, efficiency, and overall user experience.Life Tech invests in researching emerging technologies to deliver advanced solutions to clients, staying a head of the curve and remaining adaptable in an ever-evolving technology landscape. 
           </p>
           <p className="text-gray-600">
-            Our journey has been marked by continuous learning, innovation, and
-            an unwavering commitment to our clients success. We donot just
-            deliver projects; we build lasting partnerships that drive
-            sustainable growth.
+           At Life Tech, we understand the importance of students Technology job market. IT Traning, Skill Workshops, for real-world ,entrepreneurship Traning, Leadership, Creativity, Industrial Visits for real world bussiness insights, Internship Opportunities to start careers, Job Placement Support in the tech world.
           </p>
         </div>
 
@@ -43,7 +37,7 @@ export default function AboutLifeTech() {
         <Card className="bg-gradient-to-r from-red-600 to-red-500 text-white shadow-lg rounded-xl p-8 flex flex-col items-center justify-center transform transition duration-300 hover:scale-105 hover:shadow-2xl">
           <CardContent className="text-center">
             <Typography variant="h4" fontWeight="bold">
-              2013
+              2010
             </Typography>
             <Typography variant="body2" className="opacity-90">
               Founded

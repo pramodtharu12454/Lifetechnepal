@@ -1,4 +1,4 @@
-import ServicesSection from "@/components/ui/ourservices";
+import ServicesSection from "@/components/homeservices/ourservices";
 import React from "react";
 
 const services = () => {

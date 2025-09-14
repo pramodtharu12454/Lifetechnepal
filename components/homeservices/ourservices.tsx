@@ -18,6 +18,7 @@ import {
   Settings,
 } from "lucide-react";
 import { useRef, useEffect } from "react";
+import Link from "next/link";
 
 export default function ServicesSection() {
   const services = [
@@ -110,10 +111,8 @@ export default function ServicesSection() {
         const distance = Math.sqrt(
           Math.pow(x - rect.width / 2, 2) + Math.pow(y - rect.height / 2, 2)
         );
-
-        const maxDistance = 250; // pixels before effect stops
+        const maxDistance = 250;
         const proximity = Math.max(0, 1 - distance / maxDistance);
-
         card.style.transform = `scale(${1 + proximity * 0.05}) translateY(${
           -proximity * 5
         }px)`;
@@ -123,14 +122,13 @@ export default function ServicesSection() {
 
     const resetCards = () => {
       const cards = container.querySelectorAll<HTMLDivElement>(".service-card");
-      cards.forEach((card) => {
-        card.style.transform = "scale(1) translateY(0)";
-      });
+      cards.forEach(
+        (card) => (card.style.transform = "scale(1) translateY(0)")
+      );
     };
 
     container.addEventListener("mousemove", handleMouseMove);
     container.addEventListener("mouseleave", resetCards);
-
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
       container.removeEventListener("mouseleave", resetCards);
@@ -138,7 +136,8 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section className="py-12 px-4 lg:px-16 mt-10" ref={containerRef}>
+    <section className="py-12 px-4 lg:px-16 mt-10 relative" ref={containerRef}>
+      {/* Header */}
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold">Our Services</h2>
         <p className="text-muted-foreground">
@@ -146,6 +145,7 @@ export default function ServicesSection() {
         </p>
       </div>
 
+      {/* Service cards grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {services.map((service, idx) => (
           <Card
@@ -181,6 +181,15 @@ export default function ServicesSection() {
             </CardFooter>
           </Card>
         ))}
+      </div>
+
+      {/* View All button (bottom of section) */}
+      <div className="flex justify-center mt-12">
+        <Link href="/services/viewallservice">
+          <Button className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg rounded-lg shadow-lg transition-transform hover:scale-105">
+            View All Services
+          </Button>
+        </Link>
       </div>
     </section>
   );

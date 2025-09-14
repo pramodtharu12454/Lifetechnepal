@@ -30,7 +30,7 @@ export default function CompanyHeader() {
 
   useEffect(() => {
     // Popup on first load
-    setShowPopup(true);
+    setShowPopup(false);
 
     // Scroll listener for home page
     const handleScroll = () => {
@@ -43,7 +43,7 @@ export default function CompanyHeader() {
     return () => {
       if (isHome) window.removeEventListener("scroll", handleScroll);
     };
-  }, [isHome]);
+  }, [isHome,setShowPopup]);
 
   return (
     <>

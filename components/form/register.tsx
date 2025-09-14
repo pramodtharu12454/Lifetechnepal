@@ -1,120 +1,232 @@
 "use client";
 
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { Button } from "@/components/ui/button";
 
-const services = [
-  {
-    title: "Website Development",
-    description:
-      "Highly functional & visually appealing websites designed to meet your needs. We build fast, secure and scalable solutions.",
-    image: "/images/website.png",
-  },
-  {
-    title: "Software Development",
-    description:
-      "Custom system/software tailored to your business requirements with long descriptions that might go beyond the normal size.",
-    image: "/images/software.jpg",
-  },
-  {
-    title: "Graphics Design",
-    description:
-      "Creative designs that communicate your brand’s story effectively.",
-    image: "/images/graphic.jpg",
-  },
-  {
-    title: "App Development",
-    description:
-      "Innovative and user-friendly mobile applications designed to engage users.",
-    image: "/images/appdev.png",
-  },
-  {
-    title: "Logo Design",
-    description:
-      "Unique and professional logos to establish your brand identity.",
-    image: "/images/logo.png",
-  },
-];
+export default function EventRegisterForm() {
+  const initialValues = {
+    fullName: "",
+    email: "",
+    phone: "",
+    age: "",
+    gender: "",
+    address: "",
+    college: "",
+    course: "",
+    message: "",
+  };
 
-export default function ServicesPreview() {
+  const validationSchema = Yup.object({
+    fullName: Yup.string().required("Full name is required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    phone: Yup.string()
+      .matches(/^[0-9]{10}$/, "Must be 10 digits")
+      .required("Phone number is required"),
+    age: Yup.number().min(10).max(100).required("Age is required"),
+    gender: Yup.string().required("Gender is required"),
+    address: Yup.string().required("Address is required"),
+    college: Yup.string().required("College is required"),
+    course: Yup.string().required("Course is required"),
+  });
+
+  const handleSubmit = async (values: typeof initialValues) => {
+    console.log("Form submitted:", values);
+    // 🔗 Here you can connect to your API
+    // await axios.post("/api/register-event", values);
+    alert("Registration Successful!");
+  };
+
   return (
-    <section className="py-16 bg-green-50">
-      {/* Section Header */}
-      <div className="text-center mb-12 px-4">
-        <p className="text-sm text-gray-500 uppercase tracking-wide">
-          Our Services
-        </p>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 drop-shadow-md">
-          Exceptional Services For Your{" "}
-          <span className="text-green-600 drop-shadow-lg">Business Growth</span>
+    <section className="w-full flex justify-center mt-12 px-4">
+      <div className="w-full max-w-3xl bg-white p-8 rounded-2xl shadow-xl">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-900">
+          Event Registration Form
         </h2>
-        <p className="text-gray-600 mt-2 max-w-2xl mx-auto text-sm sm:text-base drop-shadow-sm">
-          Discover our wide range of digital solutions to enhance your online
-          presence.
-        </p>
-      </div>
 
-      {/* Grid Layout (3 cards only) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {services.slice(0, 3).map((service, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 50, rotate: index % 2 === 0 ? -3 : 3 }}
-            whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 100,
-              damping: 15,
-              delay: index * 0.1,
-            }}
-            viewport={{ once: false, amount: 0.3 }}
-            whileHover={{
-              scale: 1.05,
-              rotateX: -5,
-              transition: { type: "spring", stiffness: 200, damping: 10 },
-            }}
-          >
-            <Card className="group h-[400px] flex flex-col justify-between rounded-2xl border border-gray-100 shadow-lg transition-transform duration-300 bg-white hover:shadow-2xl hover:bg-gradient-to-r hover:from-blue-300 hover:to-green-300 cursor-pointer overflow-hidden">
-              <CardContent className="p-6 text-center flex flex-col items-center text-gray-700 group-hover:text-white h-full">
-                {/* Square Image */}
-                <motion.div
-                  className="w-28 h-28 flex items-center justify-center rounded-lg bg-gray-100 group-hover:bg-white/20 mb-4 shadow-md"
-                  whileHover={{ scale: 1.2, rotate: 10 }}
-                  transition={{ type: "spring", stiffness: 200 }}
-                >
-                  <Image
-                    src={service.image}
-                    alt={service.title}
-                    width={112}
-                    height={112}
-                    className="object-cover rounded-lg transition-transform duration-300 group-hover:brightness-150 group-hover:scale-110"
-                  />
-                </motion.div>
-
-                {/* Title */}
-                <h3 className="font-semibold text-lg sm:text-xl mb-2 drop-shadow-md">
-                  {service.title}
-                </h3>
-
-                {/* Scrollable Description */}
-                <div className="overflow-y-auto max-h-[120px] text-sm sm:text-base pr-1 scrollbar-thin scrollbar-thumb-transparent group-hover:scrollbar-thumb-white/40 transition-all duration-300 group-hover:text-white drop-shadow-sm">
-                  {service.description}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* View All Services Button */}
-      <div className="text-center mt-10">
-        <button
-          onClick={() => (window.location.href = "/services")}
-          className="px-6 py-3 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 transition-colors duration-300 font-medium"
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
-          View All Services
-        </button>
+          <Form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Full Name */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Full Name
+              </label>
+              <Field
+                type="text"
+                name="fullName"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter your full name"
+              />
+              <ErrorMessage
+                name="fullName"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Email
+              </label>
+              <Field
+                type="email"
+                name="email"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter your email"
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Phone
+              </label>
+              <Field
+                type="text"
+                name="phone"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter phone number"
+              />
+              <ErrorMessage
+                name="phone"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Age */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Age
+              </label>
+              <Field
+                type="number"
+                name="age"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter age"
+              />
+              <ErrorMessage
+                name="age"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Gender */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Gender
+              </label>
+              <Field
+                as="select"
+                name="gender"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </Field>
+              <ErrorMessage
+                name="gender"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Address */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Address
+              </label>
+              <Field
+                type="text"
+                name="address"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter your address"
+              />
+              <ErrorMessage
+                name="address"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* College */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                College
+              </label>
+              <Field
+                type="text"
+                name="college"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter your college"
+              />
+              <ErrorMessage
+                name="college"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Course */}
+            <div>
+              <label className="block text-gray-700 font-medium mb-1">
+                Course
+              </label>
+              <Field
+                type="text"
+                name="course"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Enter your course"
+              />
+              <ErrorMessage
+                name="course"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Message */}
+            <div className="md:col-span-2">
+              <label className="block text-gray-700 font-medium mb-1">
+                Message
+              </label>
+              <Field
+                as="textarea"
+                name="message"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 h-28 resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Any additional info..."
+              />
+              <ErrorMessage
+                name="message"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="md:col-span-2 flex justify-center mt-4">
+              <Button
+                type="submit"
+                className="bg-red-500 hover:bg-yellow-800 text-white font-bold px-10 py-3 rounded-full shadow-lg transition-transform transform hover:scale-105"
+              >
+                Submit Registration
+              </Button>
+            </div>
+          </Form>
+        </Formik>
       </div>
     </section>
   );

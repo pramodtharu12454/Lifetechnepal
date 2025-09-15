@@ -1,30 +1,29 @@
 "use client";
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  BarChart,
+  Box,
+  CheckSquare,
+  Cloud,
+  Cpu,
+  Film,
+  Globe,
+  Layers,
+  Settings,
   Shield,
   Smartphone,
-  Globe,
-  Cloud,
-  BarChart,
-  Settings,
-  Film,
-  Box,
-  Cpu,
-  Layers,
-  CheckSquare,
 } from "lucide-react"; // Updated icons
-import { useRef, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function ServicesSectionall() {
   const services = [

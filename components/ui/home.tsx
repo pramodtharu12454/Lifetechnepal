@@ -29,7 +29,7 @@ export default function HeroSection() {
 
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, [hasAnimated]);
+  }, []);
 
   const startCountUp = () => {
     const duration = 2000;

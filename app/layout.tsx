@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     "Life Tech Nepal provides professional web development, software solutions, and IT services in Nepal. We build fast, secure, and scalable digital solutions for your business.",
   keywords: [
     "life tech",
+    "life tech pvt ltd",
     "Life Tech Nepal",
     "Web Development Nepal",
     "IT Services Nepal",
@@ -35,13 +36,13 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://www.lifetechnepal.com",
+    canonical: "https://www.lifetech.com.np",
   },
   openGraph: {
     title: "Life Tech Nepal | Web & IT Solutions",
     description:
       "Professional web development and IT services in Nepal. Build fast, secure, and scalable digital solutions with Life Tech Nepal.",
-    url: "https://www.lifetechnepal.com",
+    url: "https://www.lifetech.com.np",
     siteName: "Life Tech Nepal",
     images: [
       {

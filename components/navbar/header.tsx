@@ -61,9 +61,9 @@ export default function CompanyHeader() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
-              <div className="relative w-10 h-10 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+              <div className="relative w-30 h-30 transform rotate-3 hover:rotate-0 transition-transform duration-300">
                 <Image
-                  src="/logo.png"
+                  src="/logo1.png"
                   alt="Life Tech Logo"
                   fill
                   className="object-contain drop-shadow-[2px_4px_6px_rgba(0,0,0,0.5)]"

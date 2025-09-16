@@ -59,10 +59,10 @@ export default function Footer() {
           {/* Left: Logo + Intro */}
           <Box>
             <Image
-              src="/logo.png"
+              src="/logo1.png"
               alt="Life Tech Logo"
-              width={180}
-              height={80}
+              width={300}
+              height={180}
               style={{ marginBottom: "1.2rem" }}
             />
             <Typography

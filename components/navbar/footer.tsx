@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   Fab,
+  Divider,
 } from "@mui/material";
 import {
   Facebook,
@@ -19,195 +20,161 @@ import {
   ArrowUp,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Footer() {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowButton(window.scrollY > 300);
-    };
+    const handleScroll = () => setShowButton(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <>
       <Box
         component="footer"
         sx={{
-          backgroundColor: "#1b1b1b",
+          background: "linear-gradient(180deg, #1b1b1b 0%, #111 100%)",
           color: "#fff",
-          padding: "3rem 1rem 1rem",
+          padding: { xs: "2rem 1rem 1rem", md: "3rem 2rem 1.5rem" },
         }}
       >
-        {/* Top Section: 4 Columns */}
+        {/* Top Section */}
         <Box
           sx={{
             display: "grid",
             gridTemplateColumns: {
               xs: "1fr",
               sm: "repeat(2, 1fr)",
-              md: "repeat(4, 1fr)",
+              md: "1.2fr 1fr 1.2fr",
             },
-            gap: 4,
+            gap: { xs: 3, md: 5 },
             mb: 4,
           }}
         >
-          {/* Column 1: Company */}
+          {/* Left: Logo + Intro */}
           <Box>
-            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-              Company
+            <Image
+              src="/logo.png"
+              alt="Life Tech Logo"
+              width={180}
+              height={80}
+              style={{ marginBottom: "1.2rem" }}
+            />
+            <Typography
+              variant="body1"
+              sx={{
+                color: "#ccc",
+                lineHeight: 1.8,
+                fontSize: "0.95rem",
+              }}
+            >
+              Life Tech Pvt. Ltd. is committed to delivering cutting-edge
+              technology solutions, expert training, and exceptional services to
+              help you stay ahead in the digital world.
+            </Typography>
+          </Box>
+
+          {/* Middle: Quick Links */}
+          <Box>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                mb: 2,
+                fontSize: "1.2rem",
+                color: "#fff",
+              }}
+            >
+              Quick Links
             </Typography>
             {[
+              "Dashboard",
               "About Us",
-              "Our Team",
-              "Contact Us",
-              "Our Services",
-              "Photo Gallery",
-              "Placement Partners",
-              "Our Partners",
-              "Success Gallery",
-              "Become an Instructor",
-              "Corporate Training",
-              "Academic Partners",
-            ].map((item, idx) => (
-              <MuiLink
-                key={idx}
-                href="#"
-                underline="hover"
-                sx={{
-                  display: "block",
-                  mb: 1,
-                  color: "#ccc",
-                  "&:hover": { color: "#00bfff" },
-                }}
-              >
-                {item}
-              </MuiLink>
-            ))}
-          </Box>
-
-          {/* Column 2: For Students */}
-          <Box>
-            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-              For Students
-            </Typography>
-            {[
-              "Payment Options",
-              "Enroll Now",
-              "Career",
-              "Offers",
-              "Students' Testimonials",
-              "Upload Your Resume",
-              "Become an Intern",
-              "Scholarship",
-              "Certificate Verification",
-            ].map((item, idx) => (
-              <MuiLink
-                key={idx}
-                href="#"
-                underline="hover"
-                sx={{
-                  display: "block",
-                  mb: 1,
-                  color: "#ccc",
-                  "&:hover": { color: "#00bfff" },
-                }}
-              >
-                {item}
-              </MuiLink>
-            ))}
-          </Box>
-
-          {/* Column 3: Info */}
-          <Box>
-            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
-              Info
-            </Typography>
-            {[
-              "Notices",
+              "Training",
               "Events",
-              "Help Center",
-              "News & Media Coverage",
-              "Help & FAQ",
-              "Terms & conditions",
-              "Privacy Policy",
+              "Our Services",
+              "Gallery",
               "Blog",
+              "Contact Us",
             ].map((item, idx) => (
               <MuiLink
                 key={idx}
                 href="#"
-                underline="hover"
+                underline="none"
                 sx={{
                   display: "block",
                   mb: 1,
-                  color: "#ccc",
+                  fontSize: "1rem",
+                  color: "#bbb",
+                  transition: "color 0.2s ease",
                   "&:hover": { color: "#00bfff" },
                 }}
               >
                 {item}
               </MuiLink>
             ))}
-
-            {/* Newsletter */}
-            <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
-              Newsletter Sign Up
-            </Typography>
-            <Box sx={{ display: "flex", gap: 1 }}>
-              <TextField
-                variant="outlined"
-                size="small"
-                placeholder="Your email"
-                sx={{
-                  bgcolor: "#fff",
-                  borderRadius: 1,
-                  flex: 1,
-                }}
-              />
-              <Button
-                variant="contained"
-                sx={{
-                  bgcolor: "red",
-                  "&:hover": { bgcolor: "#009acd" },
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Subscribe
-              </Button>
-            </Box>
           </Box>
 
-          {/* Column 4: Contact Us */}
+          {/* Right: Contact + Newsletter */}
           <Box>
-            <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                mb: 2,
+                fontSize: "1.2rem",
+                color: "#fff",
+              }}
+            >
               Contact Us
             </Typography>
-            <Typography sx={{ mb: 1 }}>
+
+            <Typography sx={{ mb: 1, color: "#ddd", lineHeight: 1.6 }}>
               Life Tech Pvt. Ltd.
               <br />
               New Baneshwor, Kathmandu 44600, Nepal
             </Typography>
-            <Typography sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+
+            <Typography
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 1,
+                color: "#ccc",
+                fontSize: "0.95rem",
+              }}
+            >
               <Phone size={18} style={{ marginRight: 6 }} /> 01-5904591,
-              9766459711, 985132030
+              9766459711
             </Typography>
-            <Typography sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-              <Phone size={18} style={{ marginRight: 6 }} /> 9766459711,
-              985132030 (WhatsApp / Viber)
+
+            <Typography
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mb: 1,
+                color: "#ccc",
+                fontSize: "0.95rem",
+              }}
+            >
+              <Phone size={18} style={{ marginRight: 6 }} /> 985132030 (WhatsApp
+              / Viber)
             </Typography>
+
             <MuiLink
               href="mailto:lifetechnepal40@gmail.com"
               underline="hover"
               sx={{
                 display: "flex",
                 alignItems: "center",
-                mb: 1,
+                mb: 3,
                 color: "#00bfff",
+                fontWeight: 500,
               }}
             >
               <Mail size={18} style={{ marginRight: 6 }} />{" "}
@@ -215,7 +182,7 @@ export default function Footer() {
             </MuiLink>
 
             {/* Social Icons */}
-            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+            <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
               {[Facebook, Twitter, Linkedin, Instagram, Youtube].map(
                 (Icon, idx) => (
                   <MuiLink
@@ -224,7 +191,8 @@ export default function Footer() {
                     target="_blank"
                     sx={{
                       color: "#fff",
-                      "&:hover": { color: "#00bfff" },
+                      transition: "transform 0.2s ease, color 0.2s ease",
+                      "&:hover": { color: "#00bfff", transform: "scale(1.1)" },
                     }}
                   >
                     <Icon size={22} />
@@ -232,16 +200,46 @@ export default function Footer() {
                 )
               )}
             </Box>
+
+            {/* Newsletter */}
+            <Typography variant="h6" sx={{ mb: 1 }}>
+              Newsletter Sign Up
+            </Typography>
+            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
+              <TextField
+                variant="outlined"
+                size="small"
+                placeholder="Your email"
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 1,
+                  flex: 1,
+                  minWidth: "200px",
+                }}
+              />
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: "red",
+                  px: 3,
+                  "&:hover": { bgcolor: "#009acd" },
+                  fontWeight: "bold",
+                }}
+              >
+                Subscribe
+              </Button>
+            </Box>
           </Box>
         </Box>
 
-        {/* Bottom Copyright */}
+        {/* Divider + Copyright */}
+        <Divider sx={{ borderColor: "#333", mb: 2 }} />
         <Typography
           variant="body2"
           sx={{
             textAlign: "center",
             color: "#aaa",
-            fontSize: "0.85rem",
+            fontSize: "0.9rem",
           }}
         >
           © 2010 LifeTech Nepal. All rights reserved. Pramod
@@ -259,6 +257,7 @@ export default function Footer() {
             bottom: 20,
             right: 20,
             bgcolor: "#00bfff",
+            boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
             "&:hover": { bgcolor: "#009acd" },
           }}
         >

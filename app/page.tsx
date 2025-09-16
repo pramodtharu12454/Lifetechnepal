@@ -15,7 +15,7 @@ const Body = () => {
     <>
       <Head>
         {/* Basic SEO */}
-        <title>Life Tech Nepal | Web & IT Solutions</title>
+        <title>life tech nepal</title>
         <meta
           name="description"
           content="Life Tech Nepal provides professional web development, software solutions, and IT services in Nepal. We build fast, secure, and scalable digital solutions for your business."
@@ -31,10 +31,7 @@ const Body = () => {
         <link rel="canonical" href="https://www.lifetech.com.np" />
 
         {/* Open Graph / Facebook */}
-        <meta
-          property="og:title"
-          content="Life Tech Nepal | Web & IT Solutions"
-        />
+        <meta property="og:title" content="life tech nepal" />
         <meta
           property="og:description"
           content="Professional web development and IT services in Nepal. Build fast, secure, and scalable digital solutions with Life Tech Nepal."

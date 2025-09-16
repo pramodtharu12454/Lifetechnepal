@@ -24,7 +24,7 @@ export default function CompanyHeader() {
     { label: "Training", href: "/tranning" },
     { label: "Event", href: "/event" },
     { label: "Our Services", href: "/services/viewallservice" },
-    { label: "Gallery", href: "/gallery" },
+    { label: "Our Success Gallery", href: "/gallery" },
     { label: "Other", href: "/other" },
   ];
 
@@ -43,7 +43,7 @@ export default function CompanyHeader() {
     return () => {
       if (isHome) window.removeEventListener("scroll", handleScroll);
     };
-  }, [isHome,setShowPopup]);
+  }, [isHome, setShowPopup]);
 
   return (
     <>

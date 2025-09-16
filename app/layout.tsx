@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Life Tech Nepal | Web & IT Solutions",
+  title: "life tech nepal",
   description:
     "Life Tech Nepal provides professional web development, software solutions, and IT services in Nepal. We build fast, secure, and scalable digital solutions for your business.",
   keywords: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     canonical: "https://www.lifetech.com.np",
   },
   openGraph: {
-    title: "Life Tech Nepal | Web & IT Solutions",
+    title: "life tech nepal",
     description:
       "Professional web development and IT services in Nepal. Build fast, secure, and scalable digital solutions with Life Tech Nepal.",
     url: "https://www.lifetech.com.np",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Life Tech Nepal | Web & IT Solutions",
+    title: "life tech nepal",
     description:
       "Professional IT services and web development company in Nepal.",
     images: ["/logo.png"],

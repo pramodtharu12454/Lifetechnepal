@@ -72,25 +72,7 @@ export default function HeroSection() {
           spacing={4}
           justifyContent="center"
           sx={{ mb: 4 }}
-        >
-          {["< />", "🗄️", "🛡️"].map((icon, i) => (
-            <Box
-              key={i}
-              sx={{
-                backgroundColor: "rgba(255,255,255,0.1)",
-                width: 60,
-                height: 60,
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 24,
-              }}
-            >
-              {icon}
-            </Box>
-          ))}
-        </Stack>
+        ></Stack>
 
         {/* Title */}
         <Typography
@@ -98,9 +80,9 @@ export default function HeroSection() {
           fontWeight="bold"
           sx={{ fontSize: { xs: "2rem", md: "3rem" } }}
         >
-          Empowering Your{" "}
+          Choose Life Tech{" "}
           <Box component="span" sx={{ color: "#ffeb3b" }}>
-            Digital Future
+            Change Life
           </Box>
         </Typography>
 

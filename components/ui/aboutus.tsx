@@ -14,23 +14,14 @@ export default function AboutLifeTech() {
   const [showTeam, setShowTeam] = useState(false);
 
   return (
-    <section className="w-full py-16 px-6 md:px-20 bg-white mt-10">
-      {/* Title Section */}
-      <div className="text-center max-w-3xl mx-auto">
-        <h2 className="text-3xl font-bold">
-          About <span className="text-red-600">Life Tech</span>
-        </h2>
-        <p className="text-gray-600 mt-2">
-          Founded with a vision to bridge the gap between technology and
-          business success, Life Tech has been at the forefront of digital
-          transformation for over a decade.
-        </p>
-      </div>
+    <section className="w-full py-16 px-6 md:px-20 bg-white ">
+     
+    
 
       {/* Our Story */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 items-center">
         <div>
-          <h3 className="text-xl font-semibold mb-4">Our Story</h3>
+          <h3 className="text-xl font-semibold mb-4">About Us</h3>
           <p className="text-gray-600 mb-4">
             Life Tech PVT.Ltd. is a software development company in Nepal that
             deals with web and software Solutions. It is a strong and energetic

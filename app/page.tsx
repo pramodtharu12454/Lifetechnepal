@@ -9,6 +9,7 @@ import UpcomingEvents from "@/components/event/event";
 import StatsSection from "@/components/ui/projectcount";
 import LifeTechPage from "@/components/ui/other";
 import Head from "next/head";
+import SecondLastSection from "@/components/ui/secondlast";
 
 const Body = () => {
   return (
@@ -65,6 +66,7 @@ const Body = () => {
 
       <div>
         <HeroSection />
+        <SecondLastSection />
         <AboutLifeTech />
         <TrainingPrograms />
         <UpcomingEvents />

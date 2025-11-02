@@ -242,7 +242,7 @@ export default function Footer() {
             fontSize: "0.9rem",
           }}
         >
-          © 2010 LifeTech Nepal. All rights reserved. Pramod
+          © 2010 LifeTech Nepal. All rights reserved. | Designed by Life Tech
         </Typography>
       </Box>
 

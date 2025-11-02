@@ -15,9 +15,6 @@ export default function AboutLifeTech() {
 
   return (
     <section className="w-full py-16 px-6 md:px-20 bg-white ">
-     
-    
-
       {/* Our Story */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 items-center">
         <div>
@@ -158,7 +155,7 @@ export default function AboutLifeTech() {
             {
               name: "Pramod Tharu",
               role: "FullStack Developer",
-              img: "/pramod.jpg",
+              img: "/team.png",
             },
             {
               name: "Sitaram Rimal",
